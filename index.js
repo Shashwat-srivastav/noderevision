@@ -1,10 +1,15 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const https = require('https');
+const axios = require('axios');
 const app =express();
 app.use(bodyparser.urlencoded({extended:true}));
 
-
+app.post("/yellow",function(req,res)
+{
+  console.log("yellow");
+  res.send();
+});
 
 app.get("/",function(req,res)
 {
@@ -12,14 +17,38 @@ app.get("/",function(req,res)
   res.sendFile(__dirname+"/doc.html");
 })
 
+app.post("/blue",function(req,res)
+{
+  console.log("blue");
+});
 
-
-app.post("/weather",function(req,res)
+app.post("/weather" ,function(req,res)
 {
 
-const city=req.body.city;
-  const url="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=edfa51a4ff3946732f60307189d4da34&units=metric";
+  // const options = {
+  //   method: 'GET',
+  //   url: 'https://genius-song-lyrics1.p.rapidapi.com/search/',
+  //   params: {q: 'alan walker', per_page: '10', page: '1'},
+  //   headers: {
+  //     'X-RapidAPI-Key': '410fb685a1mshd1962a798b650efp10ac43jsn2d2e7d369cf4',
+  //     'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
+  //   }
+  // };
+  //
+  // axios.request(options).then(function (response) {
+  //   // const x=JSON.parse(response);
+  //   console.log(response.data);
+  //   console.log(response.data.hits);
+  //   console.log(response.data.hits[0].result);
+  //   console.log(response.data.hits[0].result.title);
+  // 	// console.log(response.data);
+  // }).catch(function (error) {
+  // 	console.error(error);
+  // });
 
+const city=req.body.city;
+  // const url="https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=edfa51a4ff3946732f60307189d4da34&units=metric";
+const url="https://api.openweathermap.org/data/2.5/air_pollution/history?lat=21.322130&lon=80.768247&start=1606223802&end=1606482999&appid=edfa51a4ff3946732f60307189d4da34"
   https.get(url,function(resp)
 {
   // console.log(res);
@@ -27,10 +56,14 @@ const city=req.body.city;
 {
   // console.log(data);
    const report =JSON.parse(data);
+   // var l=[];
+    // l=JSON.parse(report.list);
    console.log(report);
-   console.log(report.main.temp);
-   res.write("<p>"+report.main+"</p>");
-      res.write("<h1> "+report.main.temp+"</h1> ");
+   console.log(report.list);
+
+   // console.log(report.list[0].main.temp);
+   // res.write("<p>"+report.main+"</p>");
+      // res.write("<h1> "+report.list[0].main.temp+"</h1> ");
    res.send();
    // res.send("<h1> "+report.main.temp+"</h1> ");
 })
