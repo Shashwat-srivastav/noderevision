@@ -24,9 +24,24 @@ app.post("/blue",function(req,res)
 
 app.post("/weather" ,function(req,res)
 {
+  const options = {
+    method: 'GET',
+    url: 'https://stock-and-options-trading-data-provider.p.rapidapi.com/options/aapl',
+    headers: {
+      'X-RapidAPI-Proxy-Secret': 'a755b180-f5a9-11e9-9f69-7bf51e845926',
+      'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
+      'X-RapidAPI-Host': 'stock-and-options-trading-data-provider.p.rapidapi.com'
+    }
+  };
 
+  axios.request(options).then(function (response) {
+  	console.log(response.data);
+  }).catch(function (error) {
+  	console.error(error);
+  });
   // const options = {
   //   method: 'GET',
+  //hrllo
   //   url: 'https://genius-song-lyrics1.p.rapidapi.com/search/',
   //   params: {q: 'alan walker', per_page: '10', page: '1'},
   //   headers: {
