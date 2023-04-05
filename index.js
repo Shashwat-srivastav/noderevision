@@ -20,6 +20,8 @@ app.get("/",function(req,res)
 app.post("/blue",function(req,res)
 {
   console.log("blue");
+  res.send();
+  
 });
 
 app.post("/weather" ,function(req,res)
@@ -76,9 +78,9 @@ const url="https://api.openweathermap.org/data/2.5/air_pollution/history?lat=21.
    console.log(report);
    console.log(report.list);
 
-   // console.log(report.list[0].main.temp);
-   // res.write("<p>"+report.main+"</p>");
-      // res.write("<h1> "+report.list[0].main.temp+"</h1> ");
+   console.log(report.list[0].main.temp);
+   res.write("<p>"+report.main+"</p>");
+      res.write("<h1> "+report.list[0].main.temp+"</h1> ");
    res.send();
    // res.send("<h1> "+report.main.temp+"</h1> ");
 })
