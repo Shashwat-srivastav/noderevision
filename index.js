@@ -19,9 +19,26 @@ app.get("/",function(req,res)
 
 app.post("/blue",function(req,res)
 {
+  const options = {
+    method: 'GET',
+    url: 'https://stock-and-options-trading-data-provider.p.rapidapi.com/options/aapl',
+    headers: {
+      'X-RapidAPI-Proxy-Secret': 'a755b180-f5a9-11e9-9f69-7bf51e845926',
+      'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
+      'X-RapidAPI-Host': 'stock-and-options-trading-data-provider.p.rapidapi.com'
+    }
+  };
+
+  axios.request(options).then(function (response) {
+  	console.log(response.data);
+  }).catch(function (error) {
+  	console.error(error);
+  });
   console.log("blue");
+  //here when you try to get request from api this will render on the console.
+  //it is not working fine it is lagging a bit but if i use it regularly it might be best to 
   res.send();
-  
+
 });
 
 app.post("/weather" ,function(req,res)
