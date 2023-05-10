@@ -2,9 +2,25 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const https = require('https');
 const axios = require('axios');
+
 const app =express();
 app.use(bodyparser.urlencoded({extended:true}));
 
+
+//File System----------------------------------------------
+const fs = require('fs');
+//Asynchronous
+fs.readFile("first.txt","utf-8",(err,data)=>{
+  console.log(data);
+});
+fs.writeFile("second.txt","perfect","utf-8",(err)=>{
+});
+//Synchronous
+ let transfer=fs.readFileSync("first.txt","utf-8");
+ fs.writeFileSync("second.txt",transfer);
+ //----------------------------------------------------------
+
+ 
 app.post("/yellow",function(req,res)
 {
   console.log("yellow");
@@ -36,7 +52,7 @@ app.post("/blue",function(req,res)
   });
   console.log("blue");
   //here when you try to get request from api this will render on the console.
-  //it is not working fine it is lagging a bit but if i use it regularly it might be best to 
+  //it is not working fine it is lagging a bit but if i use it regularly it might be best to
   res.send();
 
 });
@@ -79,6 +95,7 @@ app.post("/weather" ,function(req,res)
   // }).catch(function (error) {
   // 	console.error(error);
   // });
+  //i got alot of things to manage
 
 const city=req.body.city;
   // const url="https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=edfa51a4ff3946732f60307189d4da34&units=metric";
@@ -92,6 +109,8 @@ const url="https://api.openweathermap.org/data/2.5/air_pollution/history?lat=21.
    const report =JSON.parse(data);
    // var l=[];
     // l=JSON.parse(report.list);
+
+  //
    console.log(report);
    console.log(report.list);
 
